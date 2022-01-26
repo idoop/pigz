@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.5.0)
 
 project(pigz)
 
@@ -59,20 +59,9 @@ endif()
 
 set(PROGRAMS ${PROJECT_NAME})
 
-set(PIGZ_SRCS
-    pigz.c
-    yarn.c
-    try.c
-    zopfli/src/zopfli/deflate.c
-    zopfli/src/zopfli/blocksplitter.c
-    zopfli/src/zopfli/tree.c
-    zopfli/src/zopfli/lz77.c
-    zopfli/src/zopfli/cache.c
-    zopfli/src/zopfli/hash.c
-    zopfli/src/zopfli/util.c
-    zopfli/src/zopfli/squeeze.c
-    zopfli/src/zopfli/katajainen.c)
 
+aux_source_directory(. PIGZ_SRCS)
+aux_source_directory(zopfli/src/zopfli PIGZ_SRCS)
 add_executable(${PROJECT_NAME} ${PIGZ_SRCS})
 
 if(MSVC)
